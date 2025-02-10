@@ -8,5 +8,6 @@ $router->mount('/admin', function() use ($router) {
         echo "Đây là dashboard";
     });
 
-    $router->get('/user', UserController::class . '@testBaseModel');
+    $router->get('/user', UserController::class . '@index');
+    $router->post('/user/testUploadFile', UserController::class . '@testUploadFile');
 });
