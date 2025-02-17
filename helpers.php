@@ -53,7 +53,8 @@ if (!function_exists('view')) {
     }
 
     if (!function_exists('random_string')) {
-        function random_string($length = 10){
+        function random_string($length = 10)
+        {
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $charactersLength = strlen($characters);
             $randomString = '';
@@ -63,6 +64,28 @@ if (!function_exists('view')) {
             }
 
             return $randomString;
+        }
+    }
+
+    if (!function_exists('is_upload')) {
+        function is_upload($key)
+        {
+            return isset($_FILES[$key]) && $_FILES[$key]['size'] > 0;
+        }
+    }
+
+    if (!function_exists('redirect')) {
+        function redirect($path)
+        {
+            header("Location:" . $path);
+            exit();
+        }
+    }
+    if (!function_exists('redirect404')) {
+        function redirect404()
+        {
+            header("HTTP/1.1 404 Not Found");
+            exit();
         }
     }
 }
