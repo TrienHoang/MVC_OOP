@@ -36,6 +36,9 @@
 
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="{{ file_url('assets/admin/scripts.js') }}"></script>
+
+    @yield('scripts')
+
 </body>
 
 </html>

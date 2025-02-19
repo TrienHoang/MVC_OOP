@@ -40,4 +40,18 @@ class User extends Model{
 
         return $result > 0; //nếu >0, emaill đã tồn tại
     }
+
+    public function getUserByEmail($email){
+        $queryBuilder = $this->connection->createQueryBuilder();
+
+        $queryBuilder
+        ->select('*')
+        ->from($this->tableName)
+        ->where('email = :email')
+        ->setParameter('email',$email);
+
+        $result = $queryBuilder->fetchAssociative();
+
+        return $result;
+    }
 }

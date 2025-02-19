@@ -13,6 +13,53 @@ if (!function_exists('view')) {
 
         echo $blade->run($view, $data);
     }
+    if (!function_exists('slug')) {
+        function slug($string, $separator = '-')
+        {
+            //chuyển đổi chuỗi sang chữ thường
+            $string = mb_strtolower($string, 'UTF-8');
+
+            //thay thế các ký tự đặc biệt và dấu tiếng Việt
+            $string = preg_replace('/[^\p{L}\p{N}\s]/u', '', $string);
+            $string = preg_replace('/[\s]+/', $separator, $string);
+
+            // Loại bỏ các ký tự phân cách ở đầu và cuối chuỗi
+            $string = trim($string, $separator) . '-' . random_string(6);
+
+            return $string;
+        }
+    }
+
+    if (!function_exists('middleware_auth')) {
+        function middleware_auth()
+        {
+            $currentUrl = $_SERVER['REQUEST_URI'];
+            $authRegex = '/^\/(auth|login|register)$/';
+            $adminUrlRegex = '/^\/admin/';
+
+            // nếu ngdunng chưa đăng nhập
+            if (empty($_SESSION['user'])) {
+                // chuyển hướng trang
+                if (
+                    !preg_match($authRegex, $currentUrl)
+                    && preg_match($adminUrlRegex, $currentUrl)
+                ) {
+                    redirect('/auth');
+                }
+            } else {
+                // nếu người dùng đã đăng nhập và đang truy cập vào trang đăng kí đăng nhập
+                if (preg_match($authRegex, $currentUrl)) {
+                    $redirectTo = ($_SESSION['user']['type'] == 'admin') ? '/admin' : '/';
+                    redirect($redirectTo);
+                }
+
+                //kiểm tra quyền truy cập bào trang admin 
+                if (preg_match($adminUrlRegex, $currentUrl) && $_SESSION['user']['type'] != 'admin') {
+                    redirect('/');
+                }
+            }
+        }
+    }
 
     if (!function_exists('file_url')) {
         function file_url($path)

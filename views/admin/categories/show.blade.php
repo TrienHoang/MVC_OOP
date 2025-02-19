@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-12 mb-4 mb-lg-0">
             <div class="card">
-                <a href="/admin/users/create" class="btn btn-sm btn-success">Create</a>
+                <a href="/admin/categories/create" class="btn btn-sm btn-success">Create</a>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
@@ -27,7 +27,7 @@
                                 <th scope="col">Giá trị</th>
                             </thead>
                             <tbody>
-                                @foreach ($banner as $field => $value)
+                                @foreach ($category as $field => $value)
                                     <tr>
                                         <td scope="row">{{ strtoupper($field) }}</td>
                                         <td>
@@ -37,7 +37,7 @@
                                                 @break
 
                                                 @case('is_active')
-                                                    @if ($banner['is_active'])
+                                                    @if ($category['is_active'])
                                                         <span class="badge bg-info">YES</span>
                                                     @else
                                                         <span class="badge bg-danger">NO</span>
