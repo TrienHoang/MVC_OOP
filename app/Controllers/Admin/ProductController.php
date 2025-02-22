@@ -102,7 +102,6 @@ class ProductController extends Controller
 
                 ]
             );
-            // debug($data);
 
             if (!empty($errors)) {
 
@@ -122,12 +121,14 @@ class ProductController extends Controller
             } else {
                 $data['img_thumbnail'] = null;
             }
+
             // điều chỉnh dữ liệu
             $data['is_active']      = $data['is_active']    ?? 0;
             $data['is_sale']      = $data['is_sale']    ?? 0;
             $data['is_show_home']      = $data['is_show_home']    ?? 0;
             $data['slug'] = slug($data['name']);
 
+            
             // Insert
             $this->product->insert($data);
 

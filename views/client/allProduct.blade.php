@@ -1,18 +1,18 @@
 @extends('client.layouts.main')
 
 @section('content')
+
     <!-- Header-->
     @include('client.layouts.partials.header')
-
-    <!-- section-->
+    
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                @foreach ($products as $item)
+                @foreach ($products['data'] as $item)
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="{{$item['p_img_thumbnail']}}" alt="..." />
+                        <img class="card-img-top" src="{{file_url($item['p_img_thumbnail'])}}" alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
@@ -30,7 +30,17 @@
                     </div>
                 </div>
                 @endforeach
+   
             </div>
+            <nav aria-label="Page navigation" class="d-flex">
+                <ul class="pagination">
+                    @for ($i = 1; $i <= $products['totalPage']; ++$i)
+                        <li class="page-item @if ($product['page'] == $i) active @endif">
+                            <a class="page-link" href="/allproducts/?page={{ $i }}&limit={{ $products['limit'] }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+                </ul>
+            </nav>
         </div>
     </section>
 @endsection

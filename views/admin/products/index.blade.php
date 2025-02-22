@@ -39,7 +39,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $product)
-                                    <tr>
+                                    <tr >
                                         <td scope="row">{{ $product['p_id'] }}</td>
                                         <td>{{ $product['p_name'] }}</td>
                                         <td>{{ $product['c_name'] }}</td>
@@ -72,7 +72,7 @@
                                         </td>
                                         <td>{{ $product['p_created_at'] }}</td>
                                         <td>{{ $product['p_updated_at'] }}</td>
-                                        <td>
+                                        <td >
                                             <a href="/admin/products/show/{{ $product['p_id'] }}"
                                                 class="btn btn-sm btn-info">Detail</a>
                                             <a href="/admin/products/edit/{{ $product['p_id'] }}"
